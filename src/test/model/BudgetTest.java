@@ -5,17 +5,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TestBudget {
-    private Budget testBudget;
+class BudgetTest {
+    private Budget budgetTest;
 
     @BeforeEach
     public void runBefore() {
-        testBudget = new Budget("Groceries", 400.00);
+        budgetTest = new Budget("Groceries", 400.00);
     }
 
     @Test
     public void testConstructor() {
-        assertEquals("Groceries", testBudget.getCategory());
-        assertEquals(400.00, testBudget.getLimit());
+        assertEquals("Groceries", budgetTest.getCategory());
+        assertEquals(400.00, budgetTest.getLimit());
     }
 }

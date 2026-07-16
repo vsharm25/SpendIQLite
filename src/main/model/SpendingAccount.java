@@ -3,13 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-// Represents a spending account that has a collection of transactions
+// Represents a spending account having collection of transactions
 public class SpendingAccount {
 
     private List<Transaction> transactions;
 
     // EFFECTS: constructs an empty spending account with no transactions
-
     public SpendingAccount() {
         transactions = new ArrayList<>();
     }
@@ -25,8 +24,7 @@ public class SpendingAccount {
         return transactions;
     }
 
-    // REQUIRES:category cannot be null
-    // EFFECTS: returns total amount of transations for the given category
+    // EFFECTS: returns total amount for transations of the category
     public double getTotalForCategory(String category) {
         double total = 0;
         for (Transaction t : transactions) {

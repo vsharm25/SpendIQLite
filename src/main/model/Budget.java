@@ -1,6 +1,6 @@
 package model;
 
-// Represents a monthly budget set for a specific spending category
+// Represents a budget set for a specific category
 
 public class Budget {
     private String category;
