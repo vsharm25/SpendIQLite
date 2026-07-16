@@ -16,16 +16,16 @@ Java is a great way to strengthen my understanding of core software design
 principles without relying on external libraries or ML tooling.
 
 **Key features:**
-- Log transactions by category, amount, and date
+- Logs transactions by category, amount, and date
 - Detect categories trending above their historical average
-- Project month-end totals based on current spending pace
-- Flag likely recurring charges (subscriptions)
+- Projects month-end totals based on current spending pace
+- Flags likely recurring charges (subscriptions)
 - Compute an overall budget health score
 
 
 ## User Stories
 
-- As a user, I want to be able to add a transaction to my spending account, specifying the amount, category, and date.
+- As a user, I want to be able to add multiple transactions to my spending account, with the amount, category, and date.
 - As a user, I want to be able to view the list of all transactions in my spending account.
 - As a user, I want to be able to set a monthly budget for a specific category.
 - As a user, I want to be able to see my total spending in a specific category so I can track how close I am to my budget.
