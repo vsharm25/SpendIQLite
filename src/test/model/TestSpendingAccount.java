@@ -17,7 +17,6 @@ class TestSpendingAccount {
         testAccount = new SpendingAccount();
         testTransaction = new Transaction(45.50, "Groceries", LocalDate.of(2026, 7, 15));
 
-
     }
 
     @Test

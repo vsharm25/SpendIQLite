@@ -27,7 +27,6 @@ class TestBudgetTracker {
         assertEquals(400.00, b.getLimit());
     }
 
-
     @Test
     public void testSetMultipleBudgets() {
         testTracker.setBudget("Groceries", 400.00);
@@ -37,7 +36,7 @@ class TestBudgetTracker {
     }
 
     @Test
-    public void testGetBudgetNoMatch(){
+    public void testGetBudgetNoMatch() {
         testTracker.setBudget("Transport", 2000);
         assertNull(testTracker.getBudget("Entertainment"));
     }

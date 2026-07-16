@@ -9,15 +9,15 @@ public class BudgetTracker {
 
     private List<Budget> budgets;
 
-    //EFFECTS: constructs an empty budget tracker with no budget set
+    // EFFECTS: constructs an empty budget tracker with no budget set
     public BudgetTracker() {
         budgets = new ArrayList<>();
     }
 
-    //REQUIRES: limit > 0
-    //MODIFIES: this
-    //EFFECTS:  If a budget already exists with given category,
-    //          replace limit with given limit.
+    // REQUIRES: limit > 0
+    // MODIFIES: this
+    // EFFECTS: If a budget already exists with given category,
+    // replace limit with given limit.
     // If such budget does not exist, create.
 
     public void setBudget(String category, double limit) {
@@ -26,11 +26,10 @@ public class BudgetTracker {
             budgets.remove(existingBudget);
         }
         budgets.add(new Budget(category, limit));
-        
+
     }
 
-    
-    //EFFECTS: returns the Budget set for the given category or null
+    // EFFECTS: returns the Budget set for the given category or null
 
     public Budget getBudget(String category) {
         for (Budget b : budgets) {

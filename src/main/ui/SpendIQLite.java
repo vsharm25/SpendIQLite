@@ -14,15 +14,13 @@ public class SpendIQLite {
     private SpendingAccount account;
     private BudgetTracker budgetTracker;
     private Scanner input;
-    
-
 
     public SpendIQLite() {
         runApp();
     }
-    
-    //MODIFIES: this
-    //EFFECTS: processes user input
+
+    // MODIFIES: this
+    // EFFECTS: processes user input
     private void runApp() {
         boolean keepGoing = true;
         String command;
@@ -43,15 +41,15 @@ public class SpendIQLite {
         System.out.println("\nGoodbye!");
     }
 
-    //MODIFIES: this
-    //EFFECTS: initializes account, budget tracker, and input scanner
+    // MODIFIES: this
+    // EFFECTS: initializes account, budget tracker, and input scanner
     private void init() {
         account = new SpendingAccount();
         budgetTracker = new BudgetTracker();
         input = new Scanner(System.in);
     }
 
-    //EFFECTS: displays menu of options to the user
+    // EFFECTS: displays menu of options to the user
     private void displayMenu() {
         System.out.println("\nSelect an option:");
         System.out.println("\ta -> add transaction");
@@ -61,8 +59,8 @@ public class SpendIQLite {
         System.out.println("\tq -> quit");
     }
 
-    //MODIFIES: this
-    //EFFECTS: processes user command
+    // MODIFIES: this
+    // EFFECTS: processes user command
     private void processCommand(String command) {
         if (command.equals("a")) {
             doAddTransaction();
@@ -77,8 +75,8 @@ public class SpendIQLite {
         }
     }
 
-    //MODIFIES: this
-    //EFFECTS: asks for details and adds transaction to account
+    // MODIFIES: this
+    // EFFECTS: asks for details and adds transaction to account
     private void doAddTransaction() {
 
         System.out.println("Enter amount:");
@@ -94,7 +92,7 @@ public class SpendIQLite {
         System.out.println("Transaction added!");
     }
 
-    //EFFECTS: show all transactions
+    // EFFECTS: show all transactions
     private void doViewTransactions() {
         List<Transaction> transactions = account.getTransactions();
 
@@ -107,8 +105,8 @@ public class SpendIQLite {
         }
     }
 
-    //MODIFIES: this
-    //EFFECTS: sets the budget with input category and limit
+    // MODIFIES: this
+    // EFFECTS: sets the budget with input category and limit
     private void doSetBudget() {
         System.out.println("Enter category:");
         String category = input.next();
@@ -120,7 +118,7 @@ public class SpendIQLite {
         System.out.println("Budget set!");
     }
 
-    //EFFECTS: returns TotalSpending vs Budget in a category
+    // EFFECTS: returns TotalSpending vs Budget in a category
     private void doViewSpendingVsBudget() {
         System.out.println("Enter category:");
         String category = input.next();
@@ -139,4 +137,3 @@ public class SpendIQLite {
     }
 
 }
-
