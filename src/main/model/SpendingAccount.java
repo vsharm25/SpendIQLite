@@ -11,24 +11,32 @@ public class SpendingAccount {
     //EFFECTS: constructs an empty spending account with no transactions
 
     public SpendingAccount() {
-        // stub
+        transactions = new ArrayList<>();
     }
 
     
     //MODIFIES: this
     //EFFECTS: adds transaction to list of transactions
     public void addTransaction(Transaction transaction) {
-        // stub
+        transactions.add(transaction);
     }
 
     //EFFECTS: returns the list of all transactions in this account
     public List<Transaction> getTransactions() {
-        return null; // stub
+        return transactions; 
     }
+
+
 
     //REQUIRES:category cannot be null
     //EFFECTS: returns total amount of transations for the given category
     public double getTotalForCategory(String category) {
-        return 0; // stub
+        double total = 0;
+        for (Transaction t : transactions) {
+            if (t.getCategory().equals(category)) {
+                total += t.getAmount();
+            }
+        }
+        return total;
     }
 }
