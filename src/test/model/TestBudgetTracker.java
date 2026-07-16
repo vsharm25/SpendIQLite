@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class BudgetTrackerTest {
     private BudgetTracker testTracker;
@@ -15,7 +16,7 @@ class BudgetTrackerTest {
 
     @Test
     public void testGetBudgetNoneSet() {
-        assertEquals(0, testTracker.getBudget("Groceries"));
+        assertNull(testTracker.getBudget("Groceries"));
     }
 
     @Test
