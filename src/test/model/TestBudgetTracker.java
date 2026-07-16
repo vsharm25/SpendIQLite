@@ -35,4 +35,10 @@ class TestBudgetTracker {
         assertEquals(400.00, testTracker.getBudget("Groceries").getLimit());
         assertEquals(150.00, testTracker.getBudget("Transport").getLimit());
     }
+
+    @Test
+    public void testGetBudgetNoMatch(){
+        testTracker.setBudget("Transport", 2000);
+        assertNull(testTracker.getBudget("Entertainment"));
+    }
 }
