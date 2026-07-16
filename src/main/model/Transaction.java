@@ -1,5 +1,6 @@
 package model;
 
+
 import java.time.LocalDate;
 // Represents a transation with amount, category and date of
 // transaction

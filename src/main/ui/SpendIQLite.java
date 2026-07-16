@@ -19,9 +19,8 @@ public class SpendIQLite {
 
     public SpendIQLite() {
         runApp();
-
-
-}
+    }
+    
     //MODIFIES: this
     //EFFECTS: processes user input
     private void runApp() {
