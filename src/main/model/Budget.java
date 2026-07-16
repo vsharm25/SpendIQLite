@@ -9,15 +9,17 @@ public class Budget {
     //REQUIRES: limit > 0
     //EFFECTS:  constructs a Budget with given category and limit
     public Budget(String category, double limit) {
+        this.category = category;
+        this.limit = limit;
     }
 
     //EFFECTS: returns the category for this budget
     public String getCategory() {
-        return null;
+        return category;
     }
 
     //EFFECTS: returns the limit of this budget
     public double getLimit() {
-        return 0; 
+        return limit; 
     }
 }
