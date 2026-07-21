@@ -1,26 +1,25 @@
 # SpendIQ Lite
 ### A smarter way to track where your money goes
 
-## A subtitle
-
-SpendIQ Lite is a personal finance tool for people who want more than a basic 
-expense log. Users record their daily transactions by category, and the app 
-surfaces **spending trends**, **month-end projections**, **recurring charge 
-detection**, and an overall **budget health score** helping users catch 
-problematic spending patterns before they become habits.
+SpendIQ is a finance tool for people who want an expense log. Users can record
+Their daily transactions by category, amount and date. The app provides spending 
+trends, month end projection and recurring charge detection like subscriptions
+users might have forgot to cancel. This app can be used by almost everyone 
+specially students can benefit highly from this, I myself faced the dificulty to
+keep a track of my expenses as a student.
 
 This project interests me because it connects directly to work I've done 
-professionally in financial data analysis and fraud/anomaly detection
-building a simplified, rule-based version of those concepts from scratch in 
-Java is a great way to strengthen my understanding of core software design 
-principles without relying on external libraries or ML tooling.
+professionally in financial data analysis so building a simplified, 
+working desktop application from scratch in Java is a great 
+way to strengthen my understanding of core software design 
+principles.
 
 **Key features:**
 - Logs transactions by category, amount, and date
-- Detect categories trending above their historical average
-- Projects month-end totals based on current spending pace
+- Detect categories trending above their past average
+- Projects month-end totals based on current spending
 - Flags likely recurring charges (subscriptions)
-- Compute an overall budget health score
+- Lets you set a budget
 
 
 ## User Stories
