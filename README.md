@@ -28,3 +28,5 @@ principles.
 - As a user, I want to be able to view the list of all transactions in my spending account.
 - As a user, I want to be able to set a monthly budget for a specific category.
 - As a user, I want to be able to see my total spending in a specific category so I can track how close I am to my budget.
+- As a user, I want to be able to save the transactions and the budgets I have created. 
+- As a user, I want to be able to load the transactions and budgets i had previously saved. 
