@@ -1,8 +1,13 @@
 package model;
 
+
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a budget set for a specific category
 
-public class Budget {
+public class Budget implements Writable {
     private String category;
     private double limit;
 
@@ -21,5 +26,14 @@ public class Budget {
     // EFFECTS: returns the limit of this budget
     public double getLimit() {
         return limit;
+    }
+
+    // EFFECTS: returns this budget as a JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("category", category);
+        json.put("limit", limit);
+        return json;
     }
 }

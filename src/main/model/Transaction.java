@@ -1,14 +1,29 @@
 package model;
 
 import java.time.LocalDate;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a transation with amount, category and date of
 // transaction
 
-public class Transaction {
+public class Transaction implements Writable {
 
     private double amount;
     private String category;
     private LocalDate date;
+
+    // EFFECTS: returns this transation as JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("amount", amount);
+        json.put("category", category);
+        json.put("date", date.toString());
+        return json;
+     }
+
 
     // REQUIRES: amount > 0, Category cannot be null or empty,
     // date cannot be null

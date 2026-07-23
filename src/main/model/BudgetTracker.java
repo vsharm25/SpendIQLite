@@ -3,9 +3,14 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a tracker that holds budgets for different categories
 
-public class BudgetTracker {
+public class BudgetTracker implements Writable {
 
     private List<Budget> budgets;
 
@@ -38,5 +43,25 @@ public class BudgetTracker {
             }
         }
         return null;
+    }
+
+    // EFFECTS: returns this budget tracker as a JSON object,
+    // with all budgets as a JSON array
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("budgets", budgetsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns budgets in this tracker as a JSON array
+    private JSONArray budgetsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Budget b : budgets) {
+            jsonArray.put(b.toJson());
+        }
+
+        return jsonArray;
     }
 }

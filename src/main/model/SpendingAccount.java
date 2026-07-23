@@ -3,8 +3,13 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a spending account having collection of transactions
-public class SpendingAccount {
+public class SpendingAccount implements Writable {
 
     private List<Transaction> transactions;
 
@@ -33,5 +38,25 @@ public class SpendingAccount {
             }
         }
         return total;
+    }
+
+    // EFFECTS: returns this spending account as a JSON object,
+    // with all transactions as a JSON array
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("transactions", transactionsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns transactions in this account as a JSON array
+    private JSONArray transactionsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Transaction t : transactions) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 }
