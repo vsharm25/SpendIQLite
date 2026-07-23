@@ -25,7 +25,7 @@ class JsonWriterTest {
             writer.open();
             fail("IOException expected");
         } catch (FileNotFoundException e) {
-            // pass
+            
         }
     }
 
