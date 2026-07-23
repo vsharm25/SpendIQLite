@@ -1,7 +1,8 @@
 package ui;
 
-// Citation: modeled on JsonSerializationDemo
+// Citation: modeled on JsonSerializationDemo and TellerApp
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+// https://github.students.cs.ubc.ca/CPSC210/TellerApp
 
 import model.Budget;
 import model.SpendingAccount;
