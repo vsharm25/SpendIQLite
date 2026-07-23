@@ -1,5 +1,8 @@
 package ui;
 
+// Citation: modeled on JsonSerializationDemo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
 import model.Budget;
 import model.SpendingAccount;
 import model.BudgetTracker;
