@@ -4,16 +4,25 @@ import model.Budget;
 import model.SpendingAccount;
 import model.BudgetTracker;
 import model.Transaction;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
 public class SpendIQLite {
 
+    private static final String JSON_STORE = "./data/spendIQLite.json";
+
     private SpendingAccount account;
     private BudgetTracker budgetTracker;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
 
     public SpendIQLite() {
         runApp();
@@ -43,10 +52,12 @@ public class SpendIQLite {
 
     // MODIFIES: this
     // EFFECTS: initializes account, budget tracker, and input scanner
-    private void init() {
+     private void init() {
         account = new SpendingAccount();
         budgetTracker = new BudgetTracker();
         input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: displays menu of options to the user
@@ -55,7 +66,9 @@ public class SpendIQLite {
         System.out.println("\ta -> add transaction");
         System.out.println("\tv -> view all transactions");
         System.out.println("\tb -> set budget for category");
-        System.out.println("\ts -> view spending vs. budget");
+        System.out.println("\tc -> view spending vs. budget");
+        System.out.println("\ts -> save data to file");
+        System.out.println("\tl -> load data from file");
         System.out.println("\tq -> quit");
     }
 
@@ -68,8 +81,12 @@ public class SpendIQLite {
             doViewTransactions();
         } else if (command.equals("b")) {
             doSetBudget();
-        } else if (command.equals("s")) {
+        } else if (command.equals("c")) {
             doViewSpendingVsBudget();
+        } else if (command.equals("s")) {
+            doSaveData();
+        } else if (command.equals("l")) {
+            doLoadData();
         } else {
             System.out.println("Selection not valid, try again");
         }
@@ -133,6 +150,30 @@ public class SpendIQLite {
         } else {
             System.out.println("Budget limit: $" + budget.getLimit());
             System.out.println("Remaining: $" + (budget.getLimit() - total));
+        }
+    }
+
+    // EFFECTS: saves account and budget tracker to file
+    private void doSaveData() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(account, budgetTracker);
+            jsonWriter.close();
+            System.out.println("Saved data to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads account and budget tracker from file
+    private void doLoadData() {
+        try {
+            account = jsonReader.readAccount();
+            budgetTracker = jsonReader.readBudgetTracker();
+            System.out.println("Loaded data from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 

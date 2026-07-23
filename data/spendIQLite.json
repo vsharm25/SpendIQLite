@@ -1,0 +1,8 @@
+{
+    "account": {"transactions": [{
+        "date": "2026-07-12",
+        "amount": 1000,
+        "category": "m"
+    }]},
+    "budgetTracker": {"budgets": []}
+}
