@@ -22,7 +22,7 @@ public class Transaction implements Writable {
         json.put("category", category);
         json.put("date", date.toString());
         return json;
-     }
+    }
 
 
     // REQUIRES: amount > 0, Category cannot be null or empty,

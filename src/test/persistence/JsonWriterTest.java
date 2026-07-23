@@ -19,13 +19,11 @@ class JsonWriterTest {
     @Test
     public void testWriterInvalidFile() {
         try {
-            SpendingAccount account = new SpendingAccount();
-            BudgetTracker tracker = new BudgetTracker();
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             writer.open();
             fail("IOException expected");
         } catch (FileNotFoundException e) {
-            
+            // pass
         }
     }
 
@@ -52,13 +50,8 @@ class JsonWriterTest {
     @Test
     public void testWriterGeneral() {
         try {
-            SpendingAccount account = new SpendingAccount();
-            account.addTransaction(new Transaction(45.5, "Groceries", LocalDate.of(2026, 7, 15)));
-            account.addTransaction(new Transaction(12.0, "Transport", LocalDate.of(2026, 7, 16)));
-
-            BudgetTracker tracker = new BudgetTracker();
-            tracker.setBudget("Groceries", 400.0);
-            tracker.setBudget("Transport", 150.0);
+            SpendingAccount account = createSampleAccount();
+            BudgetTracker tracker = createSampleBudgetTracker();
 
             JsonWriter writer = new JsonWriter("./data/testWriterGeneral.json");
             writer.open();
@@ -81,6 +74,20 @@ class JsonWriterTest {
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
+    }
+
+    private SpendingAccount createSampleAccount() {
+        SpendingAccount account = new SpendingAccount();
+        account.addTransaction(new Transaction(45.5, "Groceries", LocalDate.of(2026, 7, 15)));
+        account.addTransaction(new Transaction(12.0, "Transport", LocalDate.of(2026, 7, 16)));
+        return account;
+    }
+
+    private BudgetTracker createSampleBudgetTracker() {
+        BudgetTracker tracker = new BudgetTracker();
+        tracker.setBudget("Groceries", 400.0);
+        tracker.setBudget("Transport", 150.0);
+        return tracker;
     }
 
     private void checkTransaction(double amount, String category, LocalDate date, Transaction transaction) {

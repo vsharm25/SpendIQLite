@@ -60,7 +60,7 @@ public class JsonReader {
         return account;
     }
 
-     private void addTransactions(SpendingAccount account, JSONObject jsonObject) {
+    private void addTransactions(SpendingAccount account, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("transactions");
         for (Object json : jsonArray) {
             JSONObject nextTransaction = (JSONObject) json;
@@ -70,10 +70,10 @@ public class JsonReader {
 
 
 
-}
+    }
 
 // MODIFIES: account
-    // EFFECTS: parses transaction from JSON object and adds it to spending account
+// EFFECTS: parses transaction from JSON object and adds it to spending account
     private void addTransaction(SpendingAccount account, JSONObject jsonObject) {
         double amount = jsonObject.getDouble("amount");
         String category = jsonObject.getString("category");

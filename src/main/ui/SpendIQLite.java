@@ -52,7 +52,7 @@ public class SpendIQLite {
 
     // MODIFIES: this
     // EFFECTS: initializes account, budget tracker, and input scanner
-     private void init() {
+    private void init() {
         account = new SpendingAccount();
         budgetTracker = new BudgetTracker();
         input = new Scanner(System.in);

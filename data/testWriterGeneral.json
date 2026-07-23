@@ -1,0 +1,24 @@
+{
+    "account": {"transactions": [
+        {
+            "date": "2026-07-15",
+            "amount": 45.5,
+            "category": "Groceries"
+        },
+        {
+            "date": "2026-07-16",
+            "amount": 12,
+            "category": "Transport"
+        }
+    ]},
+    "budgetTracker": {"budgets": [
+        {
+            "limit": 400,
+            "category": "Groceries"
+        },
+        {
+            "limit": 150,
+            "category": "Transport"
+        }
+    ]}
+}
