@@ -53,12 +53,17 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
+    // EFFECTS: parses spending account from JSON object and returns it
+
     private SpendingAccount parseAccount(JSONObject jsonObject) {
         SpendingAccount account = new SpendingAccount();
         JSONObject accountJson = jsonObject.getJSONObject("account");
         addTransactions(account, accountJson);
         return account;
     }
+
+    // MODIFIES: account
+    // EFFECTS: parses transactions from JSON object and adds them to spending account
 
     private void addTransactions(SpendingAccount account, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("transactions");
@@ -67,9 +72,7 @@ public class JsonReader {
             addTransaction(account, nextTransaction);
         }
 
-
-
-
+        
     }
 
 // MODIFIES: account

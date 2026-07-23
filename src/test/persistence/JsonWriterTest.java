@@ -1,4 +1,6 @@
 package persistence;
+// Citation: test structure modeled on JsonSerializationDemo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
 import model.Budget;
 import model.BudgetTracker;
