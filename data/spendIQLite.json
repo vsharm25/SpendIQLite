@@ -1,8 +1,11 @@
 {
     "account": {"transactions": [{
-        "date": "2026-07-12",
-        "amount": 1000,
-        "category": "m"
+        "date": "2026-08-09",
+        "amount": 10000,
+        "category": "c"
     }]},
-    "budgetTracker": {"budgets": []}
+    "budgetTracker": {"budgets": [{
+        "limit": 100000,
+        "category": "c"
+    }]}
 }
