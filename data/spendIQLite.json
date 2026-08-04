@@ -1,11 +1,33 @@
 {
-    "account": {"transactions": [{
-        "date": "2026-08-09",
-        "amount": 10000,
-        "category": "c"
-    }]},
-    "budgetTracker": {"budgets": [{
-        "limit": 100000,
-        "category": "c"
-    }]}
+    "account": {"transactions": [
+        {
+            "date": "2026-08-15",
+            "amount": 10000,
+            "category": "Education"
+        },
+        {
+            "date": "2026-07-01",
+            "amount": 15000,
+            "category": "Living"
+        },
+        {
+            "date": "2026-05-01",
+            "amount": 20000,
+            "category": "Outdoor"
+        }
+    ]},
+    "budgetTracker": {"budgets": [
+        {
+            "limit": 25000,
+            "category": "Eduction"
+        },
+        {
+            "limit": 25000,
+            "category": "Living"
+        },
+        {
+            "limit": 25000,
+            "category": "Outdoor"
+        }
+    ]}
 }
