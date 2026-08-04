@@ -26,6 +26,7 @@ import java.util.List;
 // Displays all transactions (Xs) that have been added to the spending account (Y),
 // and lets the user add transactions, view/filter transactions by category
 // alongside their budget, save application state to file, and load it back.
+// As UI code, this class is not unit tested.
 public class SpendIQLiteGUI extends JFrame {
     private static final String JSON_STORE = "./data/spendIQLite.json";
 
@@ -122,24 +123,11 @@ public class SpendIQLiteGUI extends JFrame {
     // This is the first of the two required actions related to adding Xs to Y.
     private void onAddTransaction(ActionEvent e) {
         try {
-            String amountStr = JOptionPane.showInputDialog(this, "Enter amount:");
-            if (amountStr == null) {
+            Transaction t = readTransactionFromUser();
+            if (t == null) {
                 return;
             }
-            double amount = Double.parseDouble(amountStr);
-
-            String category = JOptionPane.showInputDialog(this, "Enter category:");
-            if (category == null || category.isEmpty()) {
-                return;
-            }
-
-            String dateStr = JOptionPane.showInputDialog(this, "Enter date (YYYY-MM-DD):");
-            if (dateStr == null) {
-                return;
-            }
-            LocalDate date = LocalDate.parse(dateStr);
-
-            account.addTransaction(new Transaction(amount, category, date));
+            account.addTransaction(t);
             onShowAll(e);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Amount must be a number.",
@@ -148,6 +136,31 @@ public class SpendIQLiteGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Date must be in YYYY-MM-DD format.",
                     "Invalid input", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    // EFFECTS: prompts the user for an amount, category, and date via input dialogs and
+    // returns a new Transaction built from them; returns null if the user cancels any
+    // prompt; throws NumberFormatException if amount isn't a number, DateTimeParseException
+    // if date isn't in YYYY-MM-DD format
+    private Transaction readTransactionFromUser() {
+        String amountStr = JOptionPane.showInputDialog(this, "Enter amount:");
+        if (amountStr == null) {
+            return null;
+        }
+        double amount = Double.parseDouble(amountStr);
+
+        String category = JOptionPane.showInputDialog(this, "Enter category:");
+        if (category == null || category.isEmpty()) {
+            return null;
+        }
+
+        String dateStr = JOptionPane.showInputDialog(this, "Enter date (YYYY-MM-DD):");
+        if (dateStr == null) {
+            return null;
+        }
+        LocalDate date = LocalDate.parse(dateStr);
+
+        return new Transaction(amount, category, date);
     }
 
     // EFFECTS: prompts the user for a category, filters the transaction table down to the
@@ -161,14 +174,26 @@ public class SpendIQLiteGUI extends JFrame {
             return;
         }
 
+        tableModel.setTransactions(filterByCategory(category));
+
+        JOptionPane.showMessageDialog(this, buildSpendingMessage(category),
+                "Spending vs Budget", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    // EFFECTS: returns the subset of the account's transactions matching the given category
+    private List<Transaction> filterByCategory(String category) {
         List<Transaction> subset = new ArrayList<>();
         for (Transaction t : account.getTransactions()) {
             if (t.getCategory().equals(category)) {
                 subset.add(t);
             }
         }
-        tableModel.setTransactions(subset);
+        return subset;
+    }
 
+    // EFFECTS: returns a message summarizing total spending in the given category versus
+    // its budget limit, if one is set
+    private String buildSpendingMessage(String category) {
         double total = account.getTotalForCategory(category);
         Budget budget = budgetTracker.getBudget(category);
 
@@ -181,8 +206,7 @@ public class SpendIQLiteGUI extends JFrame {
             message.append("\nBudget limit: $").append(String.format("%.2f", budget.getLimit()));
             message.append("\nRemaining: $").append(String.format("%.2f", budget.getLimit() - total));
         }
-        JOptionPane.showMessageDialog(this, message.toString(),
-                "Spending vs Budget", JOptionPane.INFORMATION_MESSAGE);
+        return message.toString();
     }
 
     // EFFECTS: resets the transaction table to show every transaction in the account

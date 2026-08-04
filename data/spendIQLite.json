@@ -1,8 +1,15 @@
 {
-    "account": {"transactions": [{
-        "date": "2026-07-15",
-        "amount": 1000,
-        "category": "Food"
-    }]},
+    "account": {"transactions": [
+        {
+            "date": "2026-07-15",
+            "amount": 1000,
+            "category": "Food"
+        },
+        {
+            "date": "2026-08-13",
+            "amount": 200,
+            "category": "doors"
+        }
+    ]},
     "budgetTracker": {"budgets": []}
 }

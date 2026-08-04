@@ -14,7 +14,6 @@ import java.util.Map;
 // with each category's budget limit (if one is set) overlaid as a red line.
 // This is the GUI's required visual component: it visually represents the
 // user's transaction data, rather than simply coloring existing widgets.
-
 public class SpendingChartPanel extends JPanel {
     private static final int MARGIN = 50;
     private static final int BAR_WIDTH = 60;
@@ -46,48 +45,59 @@ public class SpendingChartPanel extends JPanel {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         Map<String, Double> totals = totalsByCategory();
-        int panelHeight = getHeight();
-        int panelWidth = getWidth();
-        int baseline = panelHeight - MARGIN;
+        int baseline = getHeight() - MARGIN;
 
-        g2.setColor(Color.BLACK);
-        g2.drawLine(MARGIN, baseline, panelWidth - 10, baseline);
-        g2.drawLine(MARGIN, 10, MARGIN, baseline);
-        g2.drawString("Spending by Category", MARGIN, 20);
+        drawAxes(g2, baseline);
 
         if (totals.isEmpty()) {
             g2.drawString("No transactions yet.", MARGIN + 10, baseline - 10);
             return;
         }
 
-        double maxValue = maxOf(totals);
+        drawBars(g2, totals, baseline);
+    }
 
+    // EFFECTS: draws the chart's axis lines and title
+    private void drawAxes(Graphics2D g2, int baseline) {
+        g2.setColor(Color.BLACK);
+        g2.drawLine(MARGIN, baseline, getWidth() - 10, baseline);
+        g2.drawLine(MARGIN, 10, MARGIN, baseline);
+        g2.drawString("Spending by Category", MARGIN, 20);
+    }
+
+    // EFFECTS: draws one bar per category in totals, each with its dollar total,
+    // a category label, and (if a budget is set) a red line marking the budget limit
+    private void drawBars(Graphics2D g2, Map<String, Double> totals, int baseline) {
+        double scale = (baseline - 40) / maxOf(totals);
         int x = MARGIN + 20;
-        double scale = (baseline - 40) / maxValue;
 
         for (Map.Entry<String, Double> entry : totals.entrySet()) {
-            String category = entry.getKey();
-            double total = entry.getValue();
-            int barHeight = (int) (total * scale);
-
-            g2.setColor(new Color(70, 130, 180));
-            g2.fillRect(x, baseline - barHeight, BAR_WIDTH, barHeight);
-            g2.setColor(Color.BLACK);
-            g2.drawRect(x, baseline - barHeight, BAR_WIDTH, barHeight);
-
-            Budget budget = budgetTracker.getBudget(category);
-            if (budget != null) {
-                int limitY = baseline - (int) (budget.getLimit() * scale);
-                g2.setColor(Color.RED);
-                g2.drawLine(x, limitY, x + BAR_WIDTH, limitY);
-            }
-
-            g2.setColor(Color.BLACK);
-            g2.drawString(category, x, baseline + 15);
-            g2.drawString(String.format("$%.2f", total), x, baseline - barHeight - 5);
-
-            x += BAR_WIDTH + BAR_GAP;
+            x = drawBar(g2, entry.getKey(), entry.getValue(), baseline, scale, x);
         }
+    }
+
+    // EFFECTS: draws a single bar (with label, total, and budget line if set) at position x;
+    // returns the x position where the next bar should start
+    private int drawBar(Graphics2D g2, String category, double total, int baseline, double scale, int x) {
+        int barHeight = (int) (total * scale);
+
+        g2.setColor(new Color(70, 130, 180));
+        g2.fillRect(x, baseline - barHeight, BAR_WIDTH, barHeight);
+        g2.setColor(Color.BLACK);
+        g2.drawRect(x, baseline - barHeight, BAR_WIDTH, barHeight);
+
+        Budget budget = budgetTracker.getBudget(category);
+        if (budget != null) {
+            int limitY = baseline - (int) (budget.getLimit() * scale);
+            g2.setColor(Color.RED);
+            g2.drawLine(x, limitY, x + BAR_WIDTH, limitY);
+        }
+
+        g2.setColor(Color.BLACK);
+        g2.drawString(category, x, baseline + 15);
+        g2.drawString(String.format("$%.2f", total), x, baseline - barHeight - 5);
+
+        return x + BAR_WIDTH + BAR_GAP;
     }
 
     // EFFECTS: returns the largest value among category totals and any set budget limits
