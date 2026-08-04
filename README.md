@@ -24,7 +24,7 @@ principles.
 
 ## User Stories
 
-# Instructions for End User
+## Instructions for End User
 
 - To view all the transactions you've added to your spending account, just look at the "Transactions" tab, it's open by default when you launch the app, and shows each transaction's date, category, and amount in a table.
 
