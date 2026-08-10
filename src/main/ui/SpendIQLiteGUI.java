@@ -166,7 +166,7 @@ public class SpendIQLiteGUI extends JFrame {
     // EFFECTS: prompts the user for a category, filters the transaction table down to the
     // subset of transactions in that category, and displays that category's total spending
     // versus its budget limit (if one is set). This is the second of the two required
-    // actions: it displays a subset of Xs satisfying a criterion (category) specified
+    // actions: it displays a subset of Xs satisfying a category specified
     // by the user.
     private void onViewByCategory(ActionEvent e) {
         String category = JOptionPane.showInputDialog(this, "Enter category to view:");
