@@ -22,6 +22,8 @@ public class SpendingAccount implements Writable {
     // EFFECTS: adds transaction to list of transactions
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
+        EventLog.getInstance().logEvent(new Event("Transaction added: $"
+                + transaction.getAmount() + " in category " + transaction.getCategory()));
     }
 
     // EFFECTS: returns the list of all transactions in this account
