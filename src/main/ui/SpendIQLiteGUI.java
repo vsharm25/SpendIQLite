@@ -22,6 +22,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.EventLog;
+import model.Event;
+
 // Represents the main window of the SpendIQ Lite graphical user interface.
 // Displays all transactions (Xs) that have been added to the spending account (Y),
 // and lets the user add transactions, view/filter transactions by category
@@ -38,8 +41,10 @@ public class SpendIQLiteGUI extends JFrame {
     private TransactionTableModel tableModel;
     private SpendingChartPanel chartPanel;
 
-    // EFFECTS: constructs the SpendIQ Lite GUI: initializes an empty account and budget
-    // tracker, lays out the window, optionally loads saved data, then displays the window
+    // EFFECTS: constructs the SpendIQ Lite GUI: initializes an empty account and
+    // budget
+    // tracker, lays out the window, optionally loads saved data, then displays the
+    // window
     public SpendIQLiteGUI() {
         super("SpendIQ Lite");
         account = new SpendingAccount();
@@ -67,7 +72,8 @@ public class SpendIQLiteGUI extends JFrame {
         setVisible(true);
     }
 
-    // EFFECTS: builds the toolbar containing all the buttons used to trigger GUI actions
+    // EFFECTS: builds the toolbar containing all the buttons used to trigger GUI
+    // actions
     private JToolBar buildToolbar() {
         JToolBar toolBar = new JToolBar();
         toolBar.setFloatable(false);
@@ -101,8 +107,10 @@ public class SpendIQLiteGUI extends JFrame {
         return toolBar;
     }
 
-    // EFFECTS: builds the tabbed panel showing the transaction table (the panel that
-    // displays all Xs added to Y) and the spending chart (the required visual component)
+    // EFFECTS: builds the tabbed panel showing the transaction table (the panel
+    // that
+    // displays all Xs added to Y) and the spending chart (the required visual
+    // component)
     private JTabbedPane buildCenterPanel() {
         JTabbedPane tabs = new JTabbedPane();
 
@@ -119,7 +127,8 @@ public class SpendIQLiteGUI extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: prompts the user for the details of a new transaction and, if valid,
-    // adds it to the account; shows an error dialog and adds nothing if input is invalid.
+    // adds it to the account; shows an error dialog and adds nothing if input is
+    // invalid.
     // This is the first of the two required actions related to adding Xs to Y.
     private void onAddTransaction(ActionEvent e) {
         try {
@@ -138,9 +147,12 @@ public class SpendIQLiteGUI extends JFrame {
         }
     }
 
-    // EFFECTS: prompts the user for an amount, category, and date via input dialogs and
-    // returns a new Transaction built from them; returns null if the user cancels any
-    // prompt; throws NumberFormatException if amount isn't a number, DateTimeParseException
+    // EFFECTS: prompts the user for an amount, category, and date via input dialogs
+    // and
+    // returns a new Transaction built from them; returns null if the user cancels
+    // any
+    // prompt; throws NumberFormatException if amount isn't a number,
+    // DateTimeParseException
     // if date isn't in YYYY-MM-DD format
     private Transaction readTransactionFromUser() {
         String amountStr = JOptionPane.showInputDialog(this, "Enter amount:");
@@ -163,9 +175,12 @@ public class SpendIQLiteGUI extends JFrame {
         return new Transaction(amount, category, date);
     }
 
-    // EFFECTS: prompts the user for a category, filters the transaction table down to the
-    // subset of transactions in that category, and displays that category's total spending
-    // versus its budget limit (if one is set). This is the second of the two required
+    // EFFECTS: prompts the user for a category, filters the transaction table down
+    // to the
+    // subset of transactions in that category, and displays that category's total
+    // spending
+    // versus its budget limit (if one is set). This is the second of the two
+    // required
     // actions: it displays a subset of Xs satisfying a category specified
     // by the user.
     private void onViewByCategory(ActionEvent e) {
@@ -180,7 +195,8 @@ public class SpendIQLiteGUI extends JFrame {
                 "Spending vs Budget", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    // EFFECTS: returns the subset of the account's transactions matching the given category
+    // EFFECTS: returns the subset of the account's transactions matching the given
+    // category
     private List<Transaction> filterByCategory(String category) {
         List<Transaction> subset = new ArrayList<>();
         for (Transaction t : account.getTransactions()) {
@@ -191,7 +207,8 @@ public class SpendIQLiteGUI extends JFrame {
         return subset;
     }
 
-    // EFFECTS: returns a message summarizing total spending in the given category versus
+    // EFFECTS: returns a message summarizing total spending in the given category
+    // versus
     // its budget limit, if one is set
     private String buildSpendingMessage(String category) {
         double total = account.getTotalForCategory(category);
@@ -209,13 +226,15 @@ public class SpendIQLiteGUI extends JFrame {
         return message.toString();
     }
 
-    // EFFECTS: resets the transaction table to show every transaction in the account
+    // EFFECTS: resets the transaction table to show every transaction in the
+    // account
     private void onShowAll(ActionEvent e) {
         tableModel.setTransactions(account.getTransactions());
     }
 
     // MODIFIES: this
-    // EFFECTS: prompts the user for a category and a budget limit, and sets that budget
+    // EFFECTS: prompts the user for a category and a budget limit, and sets that
+    // budget
     // in the budget tracker; refreshes the chart so the new limit line is visible
     private void onSetBudget(ActionEvent e) {
         String category = JOptionPane.showInputDialog(this, "Enter category:");
@@ -248,7 +267,8 @@ public class SpendIQLiteGUI extends JFrame {
         loadData();
     }
 
-    // EFFECTS: writes the current account and budget tracker to JSON_STORE, showing a
+    // EFFECTS: writes the current account and budget tracker to JSON_STORE, showing
+    // a
     // confirmation dialog on success or an error dialog on failure
     private void saveData() {
         try {
@@ -263,8 +283,10 @@ public class SpendIQLiteGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: reads the account and budget tracker from JSON_STORE, refreshes the table
-    // and chart, and shows a confirmation dialog on success or an error dialog on failure
+    // EFFECTS: reads the account and budget tracker from JSON_STORE, refreshes the
+    // table
+    // and chart, and shows a confirmation dialog on success or an error dialog on
+    // failure
     private void loadData() {
         try {
             account = jsonReader.readAccount();
@@ -279,8 +301,10 @@ public class SpendIQLiteGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: on startup, asks the user (Yes/No) whether to load saved data from file,
-    // and loads it if they choose Yes. Implements the "prompted to load data when the
+    // EFFECTS: on startup, asks the user (Yes/No) whether to load saved data from
+    // file,
+    // and loads it if they choose Yes. Implements the "prompted to load data when
+    // the
     // application starts" user story.
     private void promptLoadOnStartup() {
         int choice = JOptionPane.showConfirmDialog(this,
@@ -291,9 +315,10 @@ public class SpendIQLiteGUI extends JFrame {
         }
     }
 
-    // EFFECTS: on exit, asks the user (Yes/No) whether to save data to file, saves if they
-    // choose Yes, then closes the application. Implements the "prompted to save data when
-    // the application ends" user story.
+    // MODIFIES: this
+    // EFFECTS: on exit, asks the user (Yes/No) whether to save data to file, saves
+    // if they
+    // choose Yes, prints all logged events to console, then closes the application
     private void promptSaveOnExit() {
         int choice = JOptionPane.showConfirmDialog(this,
                 "Save data to file before exiting?", "Save data",
@@ -301,7 +326,16 @@ public class SpendIQLiteGUI extends JFrame {
         if (choice == JOptionPane.YES_OPTION) {
             saveData();
         }
+        printEventLog();
         dispose();
         System.exit(0);
+    }
+
+    // EFFECTS: prints every event logged during this run to the console
+    private void printEventLog() {
+        for (Event e : EventLog.getInstance()) {
+            System.out.println(e.toString());
+            System.out.println();
+        }
     }
 }

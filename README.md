@@ -37,3 +37,21 @@ principles.
 - To save your data, click the "Save" button in the toolbar, or just click "Yes" when the app asks if you'd like to save on exit.
 
 - To load your saved data back in, click the "Load" button, or click "Yes" when the app asks if you'd like to load on startup.
+
+## Phase 4 : Task 2
+
+Mon Aug 10 00:05:08 PDT 2026
+Transaction added: $200.0 in category Food
+
+Mon Aug 10 00:05:27 PDT 2026
+Transaction added: $1500.0 in category Rent
+
+Mon Aug 10 00:05:53 PDT 2026
+Transaction added: $100.0 in category Food
+
+Mon Aug 10 00:06:04 PDT 2026
+Budget set for category: Food with limit $500.0
+
+Mon Aug 10 00:06:17 PDT 2026
+Budget updated for category: Food to limit $600.0
+

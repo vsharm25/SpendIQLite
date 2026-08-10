@@ -22,16 +22,20 @@ public class BudgetTracker implements Writable {
     // REQUIRES: limit > 0
     // MODIFIES: this
     // EFFECTS: If a budget already exists with given category,
-    // replace limit with given limit.
-    // If such budget does not exist, create.
-
+    // replace limit with given limit and log the update.
+    // If such budget does not exist, create it and log the creation.
     public void setBudget(String category, double limit) {
         Budget existingBudget = getBudget(category);
         if (existingBudget != null) {
             budgets.remove(existingBudget);
+            budgets.add(new Budget(category, limit));
+            EventLog.getInstance().logEvent(new Event("Budget updated for category: "
+                    + category + " to limit $" + limit));
+        } else {
+            budgets.add(new Budget(category, limit));
+            EventLog.getInstance().logEvent(new Event("Budget set for category: "
+                    + category + " with limit $" + limit));
         }
-        budgets.add(new Budget(category, limit));
-
     }
 
     // EFFECTS: returns the Budget set for the given category or null
