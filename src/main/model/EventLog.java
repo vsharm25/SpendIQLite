@@ -1,5 +1,7 @@
 package model;
 
+// Citation: modeled on AlarmSystem
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;

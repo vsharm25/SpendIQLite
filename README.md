@@ -55,3 +55,15 @@ Budget set for category: Food with limit $500.0
 Mon Aug 10 00:06:17 PDT 2026
 Budget updated for category: Food to limit $600.0
 
+## Phase 4 : Task 3 
+
+Looking at the UML class diagram I would consider reducing how many fields SpendIQLiteGUI is directly responsible for, high coupling. It holds
+references to SpendingAccount, BudgetTracker, JsonReader, JsonWriter,
+TransactionTableModel, and SpendingChartPanel, and coordinates all of them
+directly with methods like onAddTransaction, onSetBudget, and loadData. This
+works, but it means SpendIQLiteGUI has a lot of responsibility concentrated
+in one class it's both the UI layer and the coordinator that keeps
+the table and chart in sync with the model. With more time, I would extract a
+small controller-style class that has references to classes in model package.
+This reduces SpendIQLiteGUI's responsibility. 
+

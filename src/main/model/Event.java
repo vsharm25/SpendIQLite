@@ -1,5 +1,7 @@
 package model;
 
+// Citation: modeled on AlarmSystem
+
 import java.util.Calendar;
 import java.util.Date;
 
