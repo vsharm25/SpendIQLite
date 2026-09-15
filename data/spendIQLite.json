@@ -1,23 +1,11 @@
 {
-    "account": {"transactions": [
-        {
-            "date": "2026-09-09",
-            "amount": 200,
-            "category": "Food"
-        },
-        {
-            "date": "2026-09-01",
-            "amount": 1500,
-            "category": "Rent"
-        },
-        {
-            "date": "2026-09-12",
-            "amount": 100,
-            "category": "Food"
-        }
-    ]},
+    "account": {"transactions": [{
+        "date": "2026-08-07",
+        "amount": 1000,
+        "category": "Education"
+    }]},
     "budgetTracker": {"budgets": [{
-        "limit": 600,
-        "category": "Food"
+        "limit": 2000,
+        "category": "Education"
     }]}
 }
